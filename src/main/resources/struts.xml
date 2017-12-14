@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring"></constant>
+	<!-- 修改约定的包名 -->
+	<constant name="struts.convention.package.locators" value="action, web, struts, controller, view"></constant>
+	
+	<package name="demo" namespace="/admin" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="interceptor1" class="com.soccer.interceptor.AuthenInterceptor"></interceptor>
+		</interceptors>
+		<action name="authenAction" class="com.soccer.action.AuthenticationAction">
+			<result name="success" type="redirect">${page }</result>
+			<result name="login">/admin/Login.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="interceptor1"></interceptor-ref>
+		</action>
+		
+	</package>
+
+</struts>
